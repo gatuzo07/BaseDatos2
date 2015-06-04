@@ -1,2 +1,2 @@
-# BaseDatosII
-Materia de Base de Datos II
+# BaseDatos 2
+Materia de Base de Datos 2
