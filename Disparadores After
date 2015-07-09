@@ -1,0 +1,52 @@
+
+Disparadores de tipo After
+
+Normalmente se usan para automatizar tareas.
+
+Ejericio: Se desea realizar un backup en su sistema de base de datos
+	  en Oracle. Se tiene la tabla:
+		
+		    USUARIO_XXX
+		nombre	varchar2(120)
+		edad	integer
+
+Y se requiere que al guardar un usuario se generen 2 registros en las
+tablas siguiente: 
+
+	    XXX_MENORES			    XXX_MAYORES
+	nombre 	varchar2(120)		nombre	varchar2(120)
+	edad	integer			edad	integer
+
+Se debera aplicar la siguiente regla:
+
+* Al insertar un usuario cuya edad sea menor de 18 años se debera
+  guardar a su vez en la tabla XXX_MENORES.
+
+* Si es mayor o igual a 18 años, debera guardarse a su vez en la
+  tabla XXX_MAYORES.
+
+
+———CODIGO———
+
+CREATE TABLE USUARIO_XXX(
+	NOMBRE VARCHAR2(120), 
+	EDAD INTEGER);
+
+CREATE TABLE XXX_MENORES(
+	NOMBRE VARCHAR2(120), 
+	EDAD INTEGER);
+
+CREATE TABLE XXX_MAYORES(
+	NOMBRE VARCHAR2(120), 
+	EDAD INTEGER);  
+  
+CREATE OR REPLACE TRIGGER RESPALDO_XXX AFTER INSERT ON USUARIO_XXX
+FOR EACH ROW
+BEGIN
+IF :NEW.EDAD < 18 THEN
+INSERT INTO XXX_MENORES VALUES(:NEW.NOMBRE, :NEW.EDAD);
+ELSE
+INSERT INTO XXX_MAYORES VALUES(:NEW.NOMBRE, :NEW.EDAD);
+END IF;
+END;
+/
