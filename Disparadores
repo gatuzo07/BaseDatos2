@@ -1,0 +1,20 @@
+
+Ultimo Tema
+
+Disparadores(Trigger´s)
+
+Objeto de base de datos y existen 2 tipos
+
+	-DML —> Data Manipulation Languaje
+		insert, update, delete
+
+	-DDL —> Data Description Languaje
+		son de tipo adminstrativos y estan relacionado
+		con privilegios de base de datos
+
+DML se dividen en 2 rubros;
+
+	-BEFORE —> Revisan la logica antes de la operación(insert, update, delete)
+		   en su mayoria son para validaciones
+
+	-AFTER —> Realizan la operación y despues checan la logica
