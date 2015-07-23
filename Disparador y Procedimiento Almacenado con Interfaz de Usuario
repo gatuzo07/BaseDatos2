@@ -1,0 +1,40 @@
+Objetivo:
+
+Generar un disparador y un procedimiento almacenado y probarlos en interfaz de usuario.
+
+1.- Crear la tabla 
+
+			   Producto
+		id_producto	integer
+		nombre		varchar2(180)
+		costo		float
+
+	CREATE TABLE PRODUCTO(
+	  ID_PRODUCTO INTEGER,
+	  NOMBRE VARCHAR2(180),
+	  COSTO FLOAT);
+
+2.- Generar un procedimiento para guardar un producto.
+
+	CREATE OR REPLACE PROCEDURE GUARDAR_PRODUCTO(MY_ID IN INTEGER, 
+	MY_NOMBRE IN VARCHAR2, MY_COSTO IN FLOAT)
+	AS
+	BEGIN
+	INSERT INTO PRODUCTO VALUES(MY_ID, MY_NOMBRE, MY_COSTO);
+	END;
+	/
+
+3.- Generar un disparador de tipo BEFORE que valide el costo del producto, que lance una excepción si se trata de poner un costo negativo.
+
+	CREATE OR REPLACE TRIGGER DISPARADOR_PRODUCTO BEFORE INSERT ON PRODUCTO FOR
+	EACH ROW
+	BEGIN
+	IF :NEW.COSTO <0 THEN
+	RAISE_APPLICATION_ERROR(-20001, 'NO PUEDES INTRODUCTI COSTOS MENORES A CERO');
+	END IF;
+	END;
+	/
+
+4.- Generar un cliente desktop para guardar un producto, usando el procedimiento creado.
+Verificar que si se introduce un costo negativo el disparador valide como se espera.
+
