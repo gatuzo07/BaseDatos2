@@ -1,0 +1,10 @@
+Crearemos un update para el caso de la tabla Producto, actualizaremos por nombre del producto
+
+1) Crear un procedimiento actualizar_producto_nombre
+
+	CREATE OR REPLACE PROCEDURE actualizar_producto_nombre(MY_NOMBRE IN VARCHAR2, 		MY_COSTO IN FLOAT)
+	AS
+	BEGIN
+	UPDATE PRODUCTO SET COSTO=MY_COSTO WHERE NOMBRE=MY_NOMBRE;
+	END;
+	/
